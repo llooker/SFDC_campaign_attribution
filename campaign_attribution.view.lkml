@@ -229,14 +229,14 @@ view: campaign_attribution {
   }
 
   dimension: opportunity_prev_close {
-    view_label: "E: Opportunity"
+    view_label: "D: Opportunity"
     type: date
     sql: ${TABLE}.opportunity_prev_close_date ;;
   }
 
   dimension_group: opportunity_future_create {
     type: time
-    view_label: "E: Opportunity"
+    view_label: "D: Opportunity"
     sql: ${TABLE}.opportunity_future_create_date ;;
   }
 
@@ -268,6 +268,7 @@ view: campaign_attribution {
     type: sum
     sql: ${first_touch_attribution_weight} ;;
     description: "Counts first touches for people. SFDC Contacts and Leads."
+    drill_fields: [Person*]
   }
 
 
@@ -564,6 +565,7 @@ view: campaign_attribution {
     sql: case when '{% parameter attribution_selector %}' = 'FT' then ${ft_all_leads}
         when '{% parameter attribution_selector %}' = 'MQL' then ${mql_touch_count}
         else null end;;
+    drill_fields: [Person*]
   }
 
   measure: dynamic_att_opportunities {
@@ -575,6 +577,8 @@ view: campaign_attribution {
         when '{% parameter attribution_selector %}' = 'MQL' then ${mql_touch_opportunities}
         when '{% parameter attribution_selector %}' = 'MT' then ${multi_touch_opportunities}
          else null end;;
+    drill_fields: [Opportunity*]
+
   }
 
   measure: dynamic_att_won_opportunities {
@@ -586,6 +590,7 @@ view: campaign_attribution {
         when '{% parameter attribution_selector %}' = 'MQL' then ${mql_touch_won_opportunities}
         when '{% parameter attribution_selector %}' = 'MT' then ${multi_touch_won_opportunities}
          else null end;;
+    drill_fields: [Opportunity*]
   }
 
   measure: dynamic_att_won_acv {
@@ -598,6 +603,8 @@ view: campaign_attribution {
         when '{% parameter attribution_selector %}' = 'MQL' then ${mql_touch_won_acv}
         when '{% parameter attribution_selector %}' = 'MT' then ${mt_campaign_won_total_acv}
          else null end;;
+    drill_fields: [Opportunity*]
+
   }
   measure: dynamic_att_opp_pipeline {
     type: number
@@ -608,6 +615,8 @@ view: campaign_attribution {
     sql: case when '{% parameter attribution_selector %}' = 'FT' then ${ft_campaign_opportunity_pipeline}
         when '{% parameter attribution_selector %}' = 'MT' then ${multi_touch_opportunity_pipeline}
          else null end;;
+    drill_fields: [Opportunity*]
+
   }
 
   measure: dynamic_lead_to_opp_conversion {
@@ -620,6 +629,8 @@ view: campaign_attribution {
         case when '{% parameter attribution_selector %}' = 'FT' then ${ft_lead_to_opp_create_conversion_rate}
         when '{% parameter attribution_selector %}' = 'MQL' then ${mql_lead_to_opp_create_conversion_rate}
          else null end;;
+    drill_fields: [Opportunity*]
+
   }
 
   measure: dynamic_touch_to_won_conversion {
@@ -632,7 +643,10 @@ view: campaign_attribution {
         case when '{% parameter attribution_selector %}' = 'FT' then ${ft_to_opp_won_conversion_rate}
         when '{% parameter attribution_selector %}' = 'MQL' then ${mql_to_opp_won_conversion_rate}
          else null end;;
+    drill_fields: [Opportunity*]
+
   }
+
 
 
 
@@ -665,7 +679,7 @@ view: campaign_attribution {
 
   dimension: lead_created_to_opp_created_cohort_by_week {
     label: "TO Delta (W)"
-    view_label: "E: Opportunity"
+    view_label: "D: Opportunity"
     type: string
     sql: case
         when ${opportunity_delta} < 0
@@ -696,7 +710,7 @@ view: campaign_attribution {
   dimension: lead_created_to_opportunity_close_delta_quarters {
     label: "LC Delta in Quarters"
     group_label: "LC Delta"
-    view_label: "E: Opportunity"
+    view_label: "D: Opportunity"
     type: number
     sql: case
         when ${opportunity.stage_name} = 'Closed Won'
@@ -709,7 +723,7 @@ view: campaign_attribution {
   dimension: lead_created_to_opportunity_close_delta_month {
     group_label: "LC Delta"
     label: "LC Delta in Months"
-    view_label: "E: Opportunity"
+    view_label: "D: Opportunity"
     type: number
     sql: case
         when ${opportunity.stage_name} = 'Closed Won'
@@ -722,7 +736,7 @@ view: campaign_attribution {
   dimension: lead_created_to_opportunity_close_delta_weeks {
     label: "LC Delta in Weeks"
     group_label: "LC Delta"
-    view_label: "E: Opportunity"
+    view_label: "D: Opportunity"
     type: number
     sql: case
         when ${opportunity.stage_name} = 'Closed Won'
@@ -736,7 +750,7 @@ view: campaign_attribution {
 
   measure: avg_lead_created_close_velocity_quarters {
     label: "Average LC Velocity (Quarters)"
-    view_label: "E: Opportunity"
+    view_label: "D: Opportunity"
     group_label: "Average LO Velocity"
     type: average
     sql: ${lead_created_to_opportunity_close_delta_quarters}
@@ -746,7 +760,7 @@ view: campaign_attribution {
   measure: avg_lead_created_close_velocity_month {
     label: "Average LC Velocity (Months)"
     group_label: "Average LC Velocity"
-    view_label: "E: Opportunity"
+    view_label: "D: Opportunity"
     type: average
     sql: ${lead_created_to_opportunity_close_delta_month}
       ;;
@@ -755,7 +769,7 @@ view: campaign_attribution {
   measure: avg_lead_created_close_velocity_weeks {
     label: "Average LC Velocity (Weeks)"
     group_label: "Average LC Velocity"
-    view_label: "E: Opportunity"
+    view_label: "D: Opportunity"
     type: average
     sql: ${lead_created_to_opportunity_close_delta_weeks}
       ;;
@@ -765,7 +779,7 @@ view: campaign_attribution {
 
   measure: avg_days_between_campaign_and_opportunity_created {
     label: "Average LO Velocity"
-    view_label: "E: Opportunity"
+    view_label: "D: Opportunity"
     type: average
     sql: CASE
       WHEN ${opportunity_delta} < 0

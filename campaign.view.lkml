@@ -121,6 +121,14 @@ view: campaign {
     sql: ${TABLE}.type ;;
   }
 
+  filter: campaign_comparator {}
+
+  dimension: campaign_selected {
+    type: number
+    suggest_dimension: id
+    sql: case when {% condition campaign_comparator %} ${id} {% endcondition %} then 1 else 0 end;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, opportunity.count]

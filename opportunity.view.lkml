@@ -133,6 +133,29 @@ view: opportunity {
     sql: ${TABLE}.type ;;
   }
 
+  dimension: current_quarter {
+#     hidden: yes
+    sql: EXTRACT(YEAR FROM CURRENT_DATE) || ' - Q' || EXTRACT(QUARTER FROM CURRENT_DATE) ;;
+  }
+
+  dimension: days_left_in_quarter {
+    type: number
+    sql: 91 - (DATEDIFF(
+        'day',
+        CAST(CONCAT((TO_CHAR(CAST(DATE_TRUNC('quarter', CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', CURRENT_DATE)) AS DATE), 'YYYY-MM')), '-01') as date),
+        CURRENT_DATE)) - 1
+       ;;
+  }
+
+  dimension: day_of_current_quarter {
+    type: number
+    sql: (DATEDIFF(
+       'day',
+       CAST(CONCAT((TO_CHAR(CAST(DATE_TRUNC('quarter', CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', CURRENT_DATE)) AS DATE), 'YYYY-MM')), '-01') as date),
+       CURRENT_DATE)) + 1
+       ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, stage_name, campaign.id, account.name, account.id]

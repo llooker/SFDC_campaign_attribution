@@ -15,21 +15,26 @@ explore: campaign_attribution {
   join: lead {
     sql_on: ${campaign_attribution.lead_id} = ${lead.id} ;;
     relationship: many_to_one
-    view_label: "C: Leads"
+    view_label: "C: Person"
+    # fields: []
   }
   join: contact {
     sql_on:${campaign_attribution.contact_id} = ${contact.id}  ;;
-    view_label: "D: Contacts"
+    view_label: "C: Person"
     relationship: many_to_one
+    # fields: []
+  }
+  join: person {
+    required_joins: [lead,contact]
   }
 
   join: opportunity {
-    view_label: "E: Opportunity"
+    view_label: "D: Opportunity"
     sql_on: ${lead.converted_opportunity_id} = ${opportunity.id} ;;
     relationship: many_to_one
   }
   join: account {
-    view_label: "F: Account"
+    view_label: "E: Account"
     sql_on: ${contact.account_id} = ${account.id} ;;
     relationship: many_to_one
   }
