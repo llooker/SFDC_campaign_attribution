@@ -160,4 +160,28 @@ view: opportunity {
     type: count
     drill_fields: [id, stage_name, campaign.id, account.name, account.id]
   }
+
+  dimension: lead_to_opp_weeks{
+    type: number
+    sql: datediff(week, ${created_date}, ${lead.created_date}) ;;
+  }
+
+  dimension: lead_to_opp_in_4wks {
+    type: yesno
+    sql: (${lead_to_opp_weeks} <= 4) ;;
+  }
+
+  measure: num_opps_in_4wks {
+    type: count
+    filters: {
+      field: lead_to_opp_in_4wks
+      value: "yes"
+    }
+  }
+
+  measure: lead_to_opp_4wks_conversion{
+    type: number
+    sql: ${num_opps_in_4wks}*1.00/nullif(${lead.lead_count},0) ;;
+    value_format_name: percent_2
+  }
 }

@@ -24,6 +24,7 @@ explore: campaign_attribution {
     relationship: many_to_one
     # fields: []
   }
+  #bare join which contains the coalescing between lead + contact
   join: person {
     required_joins: [lead,contact]
   }

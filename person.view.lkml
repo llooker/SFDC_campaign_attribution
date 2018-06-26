@@ -7,12 +7,6 @@ view: person {
   }
 
 
-  dimension: converted_opportunity_id {
-    type: string
-    sql: ${TABLE}.converted_opportunity_id ;;
-  }
-
-
   dimension_group: created {
     type: time
     timeframes: [
@@ -32,7 +26,7 @@ view: person {
     sql:  coalesce(${lead.current_customer_c}, ${contact.current_customer_c}) ;;
   }
 
-  dimension: department_c {
+  dimension: department {
     type: string
     sql: coalesce(${lead.department_c}, ${contact.department}) ;;
   }
