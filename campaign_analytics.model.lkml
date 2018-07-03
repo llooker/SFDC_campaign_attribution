@@ -16,13 +16,11 @@ explore: campaign_attribution {
     sql_on: ${campaign_attribution.lead_id} = ${lead.id} ;;
     relationship: many_to_one
     view_label: "C: Person"
-    # fields: []
   }
   join: contact {
     sql_on:${campaign_attribution.contact_id} = ${contact.id}  ;;
     view_label: "C: Person"
     relationship: many_to_one
-    # fields: []
   }
   #bare join which contains the coalescing between lead + contact
   join: person {

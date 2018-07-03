@@ -136,6 +136,7 @@ view: lead {
   dimension: state {
     group_label: "Lead Specific Attributes"
     type: string
+    map_layer_name: us_states
     sql: ${TABLE}.state ;;
   }
 

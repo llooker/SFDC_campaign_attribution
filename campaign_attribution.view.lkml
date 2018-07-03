@@ -216,6 +216,13 @@ view: campaign_attribution {
     sql: ${TABLE}.member_created_date ;;
   }
 
+  dimension: member_created_day_of_quarter{
+  view_label: "A: Campaign"
+  group_label: "Member Created Date"
+  type: number
+  sql:  DATEDIFF(day, DATE_TRUNC('quarter',  ${member_created_raw} ), ${member_created_raw}) + 1;;
+}
+
   dimension_group: opportunity_created {
     hidden: yes
     type: time
@@ -250,7 +257,7 @@ view: campaign_attribution {
   dimension: opportunity_delta {
     hidden: yes
     type: number
-    sql: datediff(days, ${member_created_date}, ${opportunity_created_date} ;;
+    sql: datediff(days, ${member_created_date}, ${opportunity_created_date}) ;;
   }
 
 
@@ -444,14 +451,7 @@ view: campaign_attribution {
     sql: (${mql_touch_won_opportunities} * 1.00)/nullif(${mql_touch_count},0) ;;
     value_format_name: percent_2
   }
-  measure: mql_lead_to_opp_create_conversion_rate {
-    type: number
-    description: "Calculates the conversion rate of members to opportunities"
-    view_label: "B: Funnel Metrics"
-    group_label: "MQL-Touch"
-    sql: (${mql_touch_opportunities} * 1.00)/nullif(${mql_touch_count},0) ;;
-    value_format_name: percent_2
-  }
+
 
 ################################################
 # Linear Attribution Metrics
@@ -619,19 +619,7 @@ view: campaign_attribution {
 
   }
 
-  measure: dynamic_lead_to_opp_conversion {
-    type: number
-    group_label: "Dynamic"
-    view_label: "B: Funnel Metrics"
-    value_format_name: percent_2
-    label: "{% parameter attribution_selector %} Touch to Opp Conversion Rate"
-    sql:
-        case when '{% parameter attribution_selector %}' = 'FT' then ${ft_lead_to_opp_create_conversion_rate}
-        when '{% parameter attribution_selector %}' = 'MQL' then ${mql_lead_to_opp_create_conversion_rate}
-         else null end;;
-    drill_fields: [Opportunity*]
 
-  }
 
   measure: dynamic_touch_to_won_conversion {
     type: number
