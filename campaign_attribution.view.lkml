@@ -25,7 +25,7 @@ view: campaign_attribution {
         then 1
         else 0
       end as first_touch_attribution_weight,
-      -- for the purposes of demo and creating a more standardized definition we're going to calculate LT MQL attribution as the before an opp created date
+      -- for the purposes of demo and creating a more standardized definition we're going to calculate LT MQL attribution as the last touch before an opp created date
        case
          when
            last_value(
@@ -247,18 +247,6 @@ view: campaign_attribution {
     sql: ${TABLE}.opportunity_future_create_date ;;
   }
 
-  dimension: member_days_to_close {
-    description: "Days between when a member was created and the opportunity was closed"
-    hidden: yes
-    type: number
-    sql: datediff(days,  ${member_created_date}, ${opportunity_closed_date}) ;;
-  }
-
-  dimension: opportunity_delta {
-    hidden: yes
-    type: number
-    sql: datediff(days, ${member_created_date}, ${opportunity_created_date}) ;;
-  }
 
 
 # Funnel Metrics
@@ -638,8 +626,8 @@ view: campaign_attribution {
 
 
 
-  ################################################
-# Cohorting Dimensions and Measures
+################################################
+# Count Measures
 ################################################
 
   measure: member_count {
@@ -664,6 +652,19 @@ view: campaign_attribution {
 ################################################
 # Cohorting Dimensions and Measures
 ################################################
+
+  dimension: member_days_to_close {
+    description: "Days between when a member was created and the opportunity was closed"
+    hidden: yes
+    type: number
+    sql: datediff(days,  ${member_created_date}, ${opportunity_closed_date}) ;;
+  }
+
+  dimension: opportunity_delta {
+    hidden: yes
+    type: number
+    sql: datediff(days, ${member_created_date}, ${opportunity_created_date}) ;;
+  }
 
   dimension: lead_created_to_opp_created_cohort_by_week {
     label: "TO Delta (W)"

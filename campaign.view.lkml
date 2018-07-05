@@ -121,7 +121,9 @@ view: campaign {
     sql: ${TABLE}.type ;;
   }
 
-  filter: campaign_comparator {}
+  filter: campaign_comparator {
+    suggest_dimension: id
+  }
 
   dimension: campaign_selected {
     type: number

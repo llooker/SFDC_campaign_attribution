@@ -435,7 +435,7 @@
     fill_fields:
     - campaign_attribution.member_created_week
     sorts:
-    - campaign_attribution.member_created_week desc
+    - campaign_attribution.member_created_week asc
     limit: 500
     stacking: ''
     show_value_labels: false

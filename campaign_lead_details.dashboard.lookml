@@ -1,5 +1,5 @@
-- dashboard: lead_breakdown
-  title: Lead Breakdown
+- dashboard: campaign_lead_details
+  title: 'Campaign Lead Details'
   layout: newspaper
   elements:
   - title: Top Ten Lead Dept
