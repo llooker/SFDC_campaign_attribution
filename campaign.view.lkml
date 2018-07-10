@@ -121,14 +121,16 @@ view: campaign {
     sql: ${TABLE}.type ;;
   }
 
+
+  # Used for comparing one campaign to the rest of the population
   filter: campaign_comparator {
     suggest_dimension: id
   }
 
   dimension: campaign_selected {
-    type: number
+    type: string
     suggest_dimension: id
-    sql: case when {% condition campaign_comparator %} ${id} {% endcondition %} then 1 else 0 end;;
+    sql: case when {% condition campaign_comparator %} ${id} {% endcondition %} then ${id} else 'Other Campaigns' end;;
   }
 
   measure: count {
