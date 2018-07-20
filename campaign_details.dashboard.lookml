@@ -134,25 +134,25 @@
     col: 9
     width: 8
     height: 8
-  - title: New Leads This Week
-    name: New Leads This Week
+  - title: New Leads This Quarter
+    name: New Leads This Quarter
     model: campaign_analytics
     explore: campaign_attribution
     type: single_value
     fields:
-    - campaign_attribution.member_created_week
+    - campaign_attribution.member_created_quarter
     - campaign_attribution.dynamic_att_all_touches
     fill_fields:
-    - campaign_attribution.member_created_week
+    - campaign_attribution.member_created_quarter
     filters:
-      campaign_attribution.member_created_week: 2 weeks
+      campaign_attribution.member_created_quarter: 2 quarters
     sorts:
-    - campaign_attribution.member_created_week desc
+    - campaign_attribution.member_created_quarter desc
     limit: 500
     column_limit: 50
     dynamic_fields:
-    - table_calculation: last_week
-      label: Last Week
+    - table_calculation: last_quarter
+      label: Last Quarter
       expression: offset(${campaign_attribution.dynamic_att_all_touches},1)
       value_format:
       value_format_name:
@@ -198,25 +198,25 @@
     col: 1
     width: 8
     height: 4
-  - title: New Opps This Week
-    name: New Opps This Week
+  - title: New Opps This Quarter
+    name: New Opps This Quarter
     model: campaign_analytics
     explore: campaign_attribution
     type: single_value
     fields:
-    - campaign_attribution.member_created_week
+    - campaign_attribution.member_created_quarter
     - campaign_attribution.dynamic_att_opportunities
     fill_fields:
-    - campaign_attribution.member_created_week
+    - campaign_attribution.member_created_quarter
     filters:
-      campaign_attribution.member_created_week: 2 weeks
+      campaign_attribution.member_created_week: 2 quarters
     sorts:
-    - campaign_attribution.member_created_week desc
+    - campaign_attribution.member_created_quarter desc
     limit: 500
     column_limit: 50
     dynamic_fields:
-    - table_calculation: last_week
-      label: Last Week
+    - table_calculation: last_quarter
+      label: Last Quarter
       expression: offset(${campaign_attribution.dynamic_att_opportunities},1)
       value_format:
       value_format_name:
