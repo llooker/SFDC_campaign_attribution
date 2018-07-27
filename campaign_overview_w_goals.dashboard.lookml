@@ -67,7 +67,7 @@
     listen:
       Campaign Type: campaign.type
       Business Segment: lead.segment
-    row: 12
+    row: 9
     col: 1
     width: 4
     height: 3
@@ -646,7 +646,7 @@
     listen:
       Campaign Type: campaign.type
       Business Segment: lead.segment
-    row: 9
+    row: 12
     col: 1
     width: 4
     height: 3
