@@ -64,7 +64,7 @@
     row: 12
     col: 0
     width: 8
-    height: 8
+    height: 7
   - title: Top Ten Lead Job Titles
     name: Top Ten Lead Job Titles
     model: campaign_analytics
@@ -128,7 +128,7 @@
     row: 20
     col: 0
     width: 8
-    height: 8
+    height: 7
   - title: Conversion Rates by Business Segment and Lead's Department
     name: Conversion Rates by Business Segment and Lead's Department
     model: campaign_analytics
@@ -210,7 +210,7 @@
     row: 12
     col: 8
     width: 16
-    height: 8
+    height: 7
   - title: FT Leads, Year Over Year
     name: FT Leads, Year Over Year
     model: campaign_analytics
@@ -463,7 +463,7 @@
     row: 20
     col: 8
     width: 16
-    height: 8
+    height: 7
   - title: FT vs LT MQL Lead Counts
     name: FT vs LT MQL Lead Counts
     model: campaign_analytics
@@ -567,14 +567,14 @@
     type: text
     title_text: ''
     body_text: |-
-      <font size="6" color= "black"><center>Campaign Performance by Lead Attribution</center></font>
+      <font size="5" color= "black"><center>Campaign Performance by Lead Attribution</center></font>
       <font size="4"><center><i>Broken out by Lead Department, Job function, Segment </center></i></font>
     row: 0
     col: 0
     width: 24
-    height: 4
-  - title: Lead to Opp Conversion Rate (4Wks)
-    name: Lead to Opp Conversion Rate (4Wks)
+    height: 3
+  - title: Opp Conversion Rate (4Wks)
+    name: Opp Conversion Rate (4Wks)
     model: campaign_analytics
     explore: campaign_attribution
     type: single_value
