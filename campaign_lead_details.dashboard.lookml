@@ -711,6 +711,13 @@
       value_format_name:
       _kind_hint: measure
       _type_hint: number
+    - table_calculation: percent_change
+      label: Percent Change
+      expression: "${campaign_attribution.ft_all_leads}/${last_quarter} -1"
+      value_format:
+      value_format_name: percent_2
+      _kind_hint: measure
+      _type_hint: number
     custom_color_enabled: false
     custom_color: forestgreen
     show_single_value_title: true
@@ -746,6 +753,7 @@
     show_silhouette: false
     totals_color: "#808080"
     series_types: {}
+    hidden_fields: [last_quarter]
     listen: {}
     row: 4
     col: 0
@@ -778,7 +786,7 @@
     custom_color: forestgreen
     show_single_value_title: true
     show_comparison: true
-    comparison_type: value
+    comparison_type: progress_percentage
     comparison_reverse_colors: false
     show_comparison_label: true
     comparison_label: Last Quarter
