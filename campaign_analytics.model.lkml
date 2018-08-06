@@ -29,7 +29,7 @@ explore: campaign_attribution {
 
   join: opportunity {
     view_label: "D: Opportunity"
-    sql_on: ${lead.converted_opportunity_id} = ${opportunity.id} ;;
+    sql_on: ${campaign_attribution.opportunity_id}= ${opportunity.id} ;;
     relationship: many_to_one
   }
   join: account {
